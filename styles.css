@@ -1,0 +1,30 @@
+#container {
+    background: lightgrey;
+    text-align: center;
+}
+
+#game-field {
+    background: lightblue;
+    width: 70%;
+    float: left;
+}
+
+#game-info {
+    background: yellow;
+
+}
+
+.card {
+    background: black;
+    color: white;
+    float: inherit;
+    width: 15%;
+    height: 50px;
+    margin: 5px;
+}
+
+#statistics {
+    width: 30%;
+    float: right;
+    margin-top: 0;
+}
