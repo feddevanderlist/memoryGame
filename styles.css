@@ -1,30 +1,80 @@
+body {
+    font-family: "Arial Black", Helvetica, sans-serif;
+    font-size: 1.1em;
+    color: black;
+    background: floralwhite;
+    margin: 3%;
+}
+
 #container {
-    background: lightgrey;
     text-align: center;
 }
 
 #game-field {
     background: lightblue;
-    width: 70%;
-    float: left;
+    margin-bottom: 1%;
+    margin-top: 1%;
+
 }
+
 
 #game-info {
-    background: yellow;
-
-}
-
-.card {
-    background: black;
-    color: white;
-    float: inherit;
-    width: 15%;
-    height: 50px;
-    margin: 5px;
+    background: lightgrey;
 }
 
 #statistics {
-    width: 30%;
-    float: right;
-    margin-top: 0;
+    background: lightgrey;
+    clear: left;
+    margin-top: 1%;
 }
+
+.card {
+    float: left;
+    width: 14%;
+    height: 75px;
+    margin: 1%;
+    cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+.closed {
+    background: black;
+    color: transparent;
+}
+
+.open {
+    background: lightpink;
+    color: black;
+}
+
+.found {
+    background: green;
+    color: black;
+}
+
+@media (min-width: 800px) {
+    #statistics {
+        width: 28%;
+        float: right;
+        clear: none;
+    }
+
+    #game-field {
+        width: 70%;
+        float: left;
+        padding-left: 1%;
+    }
+
+    #game-info {
+        margin-bottom: 1%;
+    }
+
+    .card {
+        height: 100px;
+        margin: 5px;
+    }
+}
+
