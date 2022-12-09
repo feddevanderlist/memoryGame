@@ -37,6 +37,11 @@ body {
     border-radius: 10px;
     text-align: center;
     overflow: hidden;
+    font-size: 30px;
+}
+
+.card:focus {
+    background: grey;
 }
 
 
@@ -53,6 +58,10 @@ body {
 .found {
     background: green;
     color: black;
+}
+
+progress {
+    width: 17%;
 }
 
 @media (min-width: 800px) {
