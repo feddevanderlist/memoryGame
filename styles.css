@@ -43,9 +43,18 @@ body {
 .card:focus {
     background: grey;
 }
+img{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+.open:hover{
+    transform: scale(1.5);
+}
 
 
-.closed{
+.closed {
     background: black;
     color: transparent;
 }

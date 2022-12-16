@@ -24,7 +24,7 @@ class Card {
 
     generateAsHtml() {
         return '<div id=\"card-' + this.id + '" class="card closed" onclick="openCard(this)" tabIndex="' + this.id + '" xmlns="http://www.w3.org/1999/html"> ' +
-            '<img src="' + this.image + '" alt="' + this.content + '" width="90%" height="90%" style="display: none"> </div>';
+            '<img src="' + this.image + '" alt="' + this.content + '" width="80%" height="80%" style="display: none"> </div>';
     }
 
 }
