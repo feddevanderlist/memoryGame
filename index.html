@@ -6,17 +6,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Memory</title>
 	<link rel="stylesheet" href="styles.css"/>
-	<script src="scripts.js"></script>
+	<script src="js/scripts.js"></script>
+	<script src="js/timer.js"></script>
+	<script src="js/card.js"></script>
+	<script src="js/gameField.js"></script>
 </head>
 
 <body>
 	<div id="container">
 		<h1>Javascript memory</h1>
 		<div id="game-info">
-			Time passed: 64 seconden <br/>
-			Found card pairs: 1<br/>
+			<div id="time-left">Time passed: 500 seconden</div>
+			<div id="pairs">Found card pairs: 0</div>
+			
 			<label for="time-remaining">Remaining card show time</label><br/>
-			<progress id="time-remaining" value="32" max="100"> 32%</progress>
+			<progress id="time-remaining" value="32" max="500"></progress>
 		</div>
 		<div id="game-container">
 			<div id="game-field">
@@ -51,35 +55,33 @@
 				<div id="card-char">
 					
 					<label for="character"><strong>Character on card</strong></label>
-					<select id="character" name="character">
-						<option value="*">*</option>
-						<option value="x">x</option>
-						<option value="/">/</option>
+					<select id="character" name="character" onchange="setCardImage(this.value)">
+						<option value="dogs">Dogs</option>
+						<option value="random">Random</option>
 					</select>
 				
 				</div>
 				
 				<div id="board-size">
-					
 					<label for="size"><strong>Board size</strong></label>
-					<input type="number" id="size" name="size" min="1" max="10" value="6">
-				
+					<input type="number" id="size" name="size" min="1" max="10" value="6"
+					       onchange="newGame('Als je het veld aan past wordt je huidige game gereset. Weet je dit zeker?')">
 				</div>
 				<div id="card-settings">
-					<label for="default-colour"><strong> card colour</strong>
-						<input id="default-colour" type="color" value="#000000">
+					<label for="closed-colour"><strong> card colour</strong>
+						<input id="closed-colour" type="color" value="#000000" oninput="updateColour(this);">
 					</label>
 					<br/>
 					<label for="open-colour"><strong> open colour</strong>
-						<input id="open-colour" type="color" value="#0000FF">
+						<input id="open-colour" type="color" value="#F5DADF" oninput="updateColour(this);">
 					</label>
 					<br/>
 					<label for="found-colour"><strong> found colour</strong>
-						<input id="found-colour" type="color" value="#00FF00">
+						<input id="found-colour" type="color" value="#00FF00" oninput="updateColour(this);">
 					</label>
 				</div>
 				<div id="game-button">
-					<button id="new-game">
+					<button id="new-game" onclick="newGame('Weet je zeker dat je een nieuw spel wil beginnen?')">
 						New Game
 					</button>
 				</div>
