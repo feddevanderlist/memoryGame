@@ -43,13 +43,14 @@ body {
 .card:focus {
     background: grey;
 }
-img{
+
+img {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
 }
 
-.open:hover{
+.open:hover {
     transform: scale(1.5);
 }
 
@@ -71,6 +72,19 @@ img{
 
 progress {
     width: 17%;
+}
+
+#navbar, nav {
+    margin: 0;
+    alignment: right;
+    text-align: right;
+}
+
+#navbar .active {
+    border-color: white;
+    border-left-color: black;
+    border-top-color: black;
+    color: black;
 }
 
 @media (min-width: 800px) {

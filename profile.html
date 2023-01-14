@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Profile</title>
+	<link rel="stylesheet" href="styles.css"/>
+	<link rel="stylesheet" href="profile.css">
+	<script src="js/profile.js"></script>
+	<script src="js/authenticator.js"></script>
+</head>
+<body>
+	<div class="container">
+		<nav id="navbar">
+			<a href="index.html">Home</a>
+			<a href="profile.html" class="active">Profile</a>
+		</nav>
+		<h1 id="username"></h1>
+		<div id="card-char">
+			<p>Change your preferences</p>
+			<label for="character"><strong>Character on card</strong></label>
+			<select id="character" name="character" onchange="updatePlayerCardPreference(this.value)">
+				<option value="dogs">Dogs</option>
+				<option value="random">Random</option>
+			</select>
+			<div id="card-settings">
+				<label for="preferred_color_closed"><strong> card colour</strong>
+					<input id="preferred_color_closed" type="color" value="#000000"
+					       oninput="updateColourPreference(this);">
+				</label>
+				<br/>
+				<label for="preferred_color_found"><strong> found colour</strong>
+					<input id="preferred_color_found" type="color" value="#00FF00"
+					       oninput="updateColourPreference(this);">
+				</label>
+			</div>
+			<label for="email"> Email</label>
+			<input id="email" onchange="updateEmail(this.value)">
+			
+		</div>
+	</div>
+</body>
+</html>

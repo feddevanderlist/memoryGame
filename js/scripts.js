@@ -3,6 +3,8 @@ window.onload = function () {
     createField();
     timer();
     updateFound(true);
+    updateTopFive();
+    setNavbar();
 }
 let globalFoundPairs;
 let gameFieldObject;
@@ -107,4 +109,27 @@ function updateColour(colourSettingElement) {
     for (let element of elements) {
         element.style.backgroundColor = colourSettingElement.value;
     }
+}
+
+function updateTopFive() {
+    let topFiveElement = document.getElementById("top-five-list");
+    fetch("http://localhost:8000/scores")
+        .then(response => response.json())
+        .then(
+            resultSet => {
+                let index = 0;
+
+
+                while (resultSet[index] !== undefined) {
+                    let node = document.createElement("li");
+                    let textNode = document.createTextNode(resultSet[index].username + " : " + resultSet[index].score);
+                    node.appendChild(textNode);
+                    topFiveElement.appendChild(node);
+                    index++;
+                }
+            }
+        ).catch(error => {
+        topFiveElement.appendChild(document.createTextNode("no data found"));
+        console.log(error);
+    })
 }

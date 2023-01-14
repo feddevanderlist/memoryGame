@@ -10,11 +10,16 @@
 	<script src="js/timer.js"></script>
 	<script src="js/card.js"></script>
 	<script src="js/gameField.js"></script>
+	<script src="js/authenticator.js"></script>
 </head>
 
 <body>
 	<div id="container">
+		<nav id="navbar">
+			<a href="index.html" class="active">Home</a>
+		</nav>
 		<h1>Javascript memory</h1>
+		
 		<div id="game-info">
 			<div id="time-left">Time passed: 500 seconden</div>
 			<div id="pairs">Found card pairs: 0</div>
@@ -28,25 +33,11 @@
 			<div id="statistics">
 				<div id="top-five">
 					<h3>Top five </h3>
-					<ol>
-						<li>
-							Tommy Pickles
-						</li>
-						<li>
-							Petunia van Koeien
-						</li>
-						<li>
-							John Smith
-						</li>
-						<li>
-							Yu Watase
-						</li>
-						<li>
-							Maria De Pooh
-						</li>
+					<ol id="top-five-list">
 					
 					</ol>
 				</div>
+				<br>
 				<div id="average-playtime">
 					<strong>Average playtime:</strong>
 					64s
