@@ -52,6 +52,7 @@ function setPageInfo() {
                             window.location.href = "./login.html";
                         })
                 } else {
+                    removeToken();
                     window.location.href = "./login.html";
                 }
             }
@@ -103,6 +104,7 @@ function updateEmailAPi(email) {
                 setEmail(email);
             }
             if (resp.code === 401) {
+                removeToken();
                 window.location.href = "./login.html";
             } else {
                 throw new Error("something went wrong");
@@ -138,6 +140,10 @@ function updatePreferencesAPi(body) {
         body: JSON.stringify(body)
     })
         .then(resp => {
+            if (resp.status === 401) {
+                removeToken();
+                window.location.href = "./login.html";
+            }
             if (!resp.ok) {
                 throw new Error("Something went wrong when updating ");
             }

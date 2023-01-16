@@ -18,19 +18,18 @@ function getPayload(token) {
     return JSON.parse(jsonPayload);
 }
 
-function getUsernameFromLocalStorage() {
-    let payload = getPayload(getToken());
-    return payload.username;
-}
-
 function getIDFromLocalStorage() {
     let payload = getPayload(getToken());
     return payload.sub;
 }
 
 function logout() {
-    localStorage.removeItem('jwt');
+    removeToken();
     window.location.href = './';
+}
+
+function removeToken(){
+    localStorage.removeItem('jwt');
 }
 
 function setNavbar() {
