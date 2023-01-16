@@ -98,15 +98,22 @@ function updateEmailAPi(email) {
         },
         body: JSON.stringify(body)
     })
-        .then(resp => resp.json())
-        .then(json => {
-            window.location.href = "./profile.html";
-        }).catch(
-        error => {
-            console.log(error);
-            window.location.href = "./login.html";
-        }
-    )
+        .then(resp => {
+            if (resp.ok) {
+                setEmail(email);
+            }
+            if (resp.code === 401) {
+                window.location.href = "./login.html";
+            } else {
+                throw new Error("something went wrong");
+            }
+        })
+        .catch(
+            error => {
+                console.log(error);
+                window.location.href = "./profile.html";
+            }
+        )
 }
 
 function updatePreferences() {
@@ -130,9 +137,10 @@ function updatePreferencesAPi(body) {
         },
         body: JSON.stringify(body)
     })
-        .then(resp => resp.json())
-        .then(json => {
-            window.location.href = "./profile.html";
+        .then(resp => {
+            if (!resp.ok) {
+                throw new Error("Something went wrong when updating ");
+            }
         }).catch(
         error => {
             console.log(error);
