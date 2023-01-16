@@ -14,14 +14,13 @@
 			<a href="login.html">Login</a>
 			<a href="register.html" class="active">Register</a>
 		</nav>
-		<form name="register_player" id="register" onsubmit="formValidation()">
+		<form name="register_player" id="register" method="POST" onsubmit="registerCheck(event)">
 			<div class="form_box">
 				<h1>Register as new player</h1>
 				<div class="input-row">
 					
 					<input type="text" name="name" placeholder="Username*">
 					<span class="error">Please Enter Your Name</span>
-				
 				
 				</div>
 				

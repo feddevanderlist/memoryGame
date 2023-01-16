@@ -1,5 +1,5 @@
 window.onload = function () {
-    if (!hasToken()) {
+    if (hasToken() === false) {
         let url = window.location.href;
         window.location.href = url.substring(0, url.lastIndexOf('/') + 1);
     } else {
@@ -14,21 +14,21 @@ function setCharacterInDocument(preferred_api) {
 }
 
 function setUsername(username) {
-    document.getElementById("username").text = "Welcome " + username
+    document.getElementById("username").appendChild(document.createTextNode("Welcome " + username));
 }
 
 function setPreferredColours(json) {
-    if (json.preferred_color_found !== "") {
-        document.getElementById("preferred_color_found").value = json.preferred_color_found;
+    if (json.color_found !== "") {
+        document.getElementById("preferred_color_found").value = json.color_found;
     }
-    if (json.preferred_color_closed !== "") {
-        document.getElementById("preferred_color_closed").value = json.preferred_color_closed;
+    if (json.color_closed !== "") {
+        document.getElementById("preferred_color_closed").value = json.color_closed;
     }
 }
 
 
 function setEmail(email) {
-    document.getElementById("email").value = json.email;
+    document.getElementById("email").value = email;
 }
 
 function setPageInfo() {
@@ -37,52 +37,60 @@ function setPageInfo() {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + getToken()
+        }
+    })
+        .then(resp => {
+                if (resp.ok) {
+                    resp.json().then(json => {
+                        setUsername(json.name);
+                        setEmail(json.email);
+                    }).catch(
+                        error => {
+                            console.log(error);
+                            window.location.href = "./login.html";
+                        })
+                } else {
+                    window.location.href = "./login.html";
+                }
+            }
+        )
+
+    fetch("http://localhost:8000/api/player/" + getIDFromLocalStorage() + "/preferences", {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json',
             'Authorization': 'Bearer ' + getToken()
         }
     })
         .then(resp => resp.json())
         .then(json => {
-            console.log(json);
-            setUsername(json.username);
             setCharacterInDocument(json.preferred_api);
             setPreferredColours(json);
-            setEmail(json.emails);
         }).catch(
         error => {
             console.log(error);
-            window.location.href = "../login.html";
+            window.location.href = "./login.html";
         }
     )
-}
-
-function updatePlayerCardPreference(characterName) {
-    let updateCardPref = confirm("Did you want to update preferred character profile?");
-    if (updateCardPref) {
-        updatePreferencesAPi("preferred_api", characterName);
-    }
-}
-
-function updateColourPreference(colourField) {
-    let updateColourPref = confirm("Did you want to update your preferred " + colourField.label.text + " profile?");
-    if (updateColourPref) {
-        updatePreferencesAPi(colourField.id, colourField.value)
-    }
 }
 
 function updateEmail(email) {
     let updateEmailPref = confirm("Did you want to update your email for your profile?");
     if (updateEmailPref) {
-        updatePreferencesAPi("email", email);
+        updateEmailAPi(email);
     }
 
 }
 
-function updatePreferencesAPi(fieldName, FieldValue) {
+function updateEmailAPi(email) {
     let body = {  // create the JSON object which will sent as the data in the body
-        fieldName: FieldValue,
+        email: email,
 
     }
-    fetch("http://localhost:8000/api/player/" + getIDFromLocalStorage(), {
+    fetch("http://localhost:8000/api/player/" + getIDFromLocalStorage() + "/email", {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
@@ -92,12 +100,43 @@ function updatePreferencesAPi(fieldName, FieldValue) {
     })
         .then(resp => resp.json())
         .then(json => {
-            console.log(json);
-            window.location.href = "../profile.html";
+            window.location.href = "./profile.html";
         }).catch(
         error => {
             console.log(error);
-            window.location.href = "../login.html";
+            window.location.href = "./login.html";
+        }
+    )
+}
+
+function updatePreferences() {
+    let optionFields = document.querySelector("#character");
+
+    let body = {
+        color_found: document.getElementById("preferred_color_found").value,
+        color_closed: document.getElementById("preferred_color_closed").value,
+        api: optionFields.value
+    }
+
+    updatePreferencesAPi(body);
+}
+
+function updatePreferencesAPi(body) {
+    fetch("http://localhost:8000/api/player/" + getIDFromLocalStorage() + "/preferences", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Authorization': 'Bearer ' + getToken()
+        },
+        body: JSON.stringify(body)
+    })
+        .then(resp => resp.json())
+        .then(json => {
+            window.location.href = "./profile.html";
+        }).catch(
+        error => {
+            console.log(error);
+            window.location.href = "./login.html";
         }
     )
 }

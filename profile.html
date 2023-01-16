@@ -13,29 +13,34 @@
 		<nav id="navbar">
 			<a href="index.html">Home</a>
 			<a href="profile.html" class="active">Profile</a>
+			<a href="" onclick="logout()">Logout</a>
 		</nav>
 		<h1 id="username"></h1>
-		<div id="card-char">
-			<p>Change your preferences</p>
-			<label for="character"><strong>Character on card</strong></label>
-			<select id="character" name="character" onchange="updatePlayerCardPreference(this.value)">
-				<option value="dogs">Dogs</option>
-				<option value="random">Random</option>
-			</select>
-			<div id="card-settings">
-				<label for="preferred_color_closed"><strong> card colour</strong>
-					<input id="preferred_color_closed" type="color" value="#000000"
-					       oninput="updateColourPreference(this);">
-				</label>
-				<br/>
-				<label for="preferred_color_found"><strong> found colour</strong>
-					<input id="preferred_color_found" type="color" value="#00FF00"
-					       oninput="updateColourPreference(this);">
-				</label>
+		<div id="preferences">
+			<div id="card-char">
+				<p>Change your preferences</p>
+				<label for="character"><strong>Character on card</strong></label>
+				<select id="character" name="character">
+					<option value="dogs">Dogs</option>
+					<option value="random">Random</option>
+				</select>
+				<div id="card-settings">
+					<label for="preferred_color_closed"><strong> card colour</strong>
+						<input id="preferred_color_closed" type="color" value="#000000">
+					</label>
+					<br/>
+					<label for="preferred_color_found"><strong> found colour</strong>
+						<input id="preferred_color_found" type="color" value="#00FF00">
+					</label>
+				</div>
+				<button onclick="updatePreferences()">Update preferences</button>
 			</div>
+		
+		
+		</div>
+		<div id="emailContainer">
 			<label for="email"> Email</label>
 			<input id="email" onchange="updateEmail(this.value)">
-			
 		</div>
 	</div>
 </body>

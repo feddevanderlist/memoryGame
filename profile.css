@@ -2,6 +2,12 @@ html {
     text-align: center;
 }
 
-.container {
+#preferences, #emailContainer {
     background: lightgrey;
+}
+
+#emailContainer {
+    margin-top: 4%;
+    margin-bottom: 4%;
+
 }

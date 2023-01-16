@@ -1,40 +1,31 @@
-// function to handle success
-function success() {
-    console.log("succes");
-    let data = this.response; //parse the string to JSON
-    console.log(data);
-    window.location.href = "../index.html";
-    return data;
-}
-
-// function to handle error
-function error(err) {
-    console.log('Request Failed', err); //error details will be in the "err" object
-    window.location = "index.html";
-    return err;
-}
-
 function createUser(name, email, password) {
-    console.log("trying to login");
-
-    let xhr = new XMLHttpRequest();
     let data = JSON.stringify({
         username: name,
         email: email,
         password: password
-
     });
-    xhr.onload = success();
-    xhr.onerror = error();
-    xhr.open('POST', "http://localhost:8000/register");
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(data);
-
+    fetch("http://localhost:8000/register", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
+        },
+        body: data
+    }).then(resp => {
+            if (resp.ok) {
+                window.location.href = "./login.html";
+            } else {
+                throw new Error('Http error' + resp.statusText)
+            }
+        }
+    ).catch(
+        error => {
+            console.log(error);
+        });
 }
 
-function formValidation() {
-
+function registerCheck(event) {
+    event.preventDefault();
     let name = document.register_player.name;
     let email = document.register_player.email;
     let password = document.register_player.password;

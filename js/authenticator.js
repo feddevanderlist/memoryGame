@@ -1,6 +1,6 @@
 function hasToken() {
     let token = localStorage.getItem('jwt');
-    return token != null;
+    return token !== null && token !== undefined && token !== "" && token !== 'undefined';
 }
 
 function getToken() {
@@ -28,6 +28,11 @@ function getIDFromLocalStorage() {
     return payload.sub;
 }
 
+function logout() {
+    localStorage.removeItem('jwt');
+    window.location.href = './';
+}
+
 function setNavbar() {
     let navbar = document.getElementById("navbar");
     if (hasToken() === false) {
@@ -47,5 +52,16 @@ function setNavbar() {
     profile.setAttribute("href", "profile.html");
     profile.appendChild(document.createTextNode("Profile"));
     navbar.appendChild(profile);
+
+    navbar.appendChild(document.createTextNode(" "));
+
+    let logoutButton = document.createElement("a");
+    logoutButton.setAttribute("href", '');
+    logoutButton.appendChild(document.createTextNode("Logout"));
+    logoutButton.setAttribute("onclick", function clickLogout() {
+        logout();
+    });
+    navbar.appendChild(logoutButton);
+
 }
 

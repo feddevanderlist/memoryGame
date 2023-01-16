@@ -1,4 +1,5 @@
-function loginCheck() {
+function loginCheck(event) {
+    event.preventDefault();
     const formData = new FormData(document.getElementById("login"));
 
     let name = formData.get("name"); // get the value of the <input name="email">
@@ -8,21 +9,23 @@ function loginCheck() {
         username: name,
         password: password
     }
-    console.log(user);
+
     fetch("http://localhost:8000/api/login_check", {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json;charset=utf-8'
+            'Content-Type': 'application/json;charset=utf-8',
+            'Accept': 'application/json'
         },
         body: JSON.stringify(user)
     })
         .then(resp => resp.json())
         .then(json => {
             localStorage.setItem('jwt', json.token);
-            window.location.href = "../index.html";
+            let url = window.location.href;
+            window.location.href = url.substring(0, url.lastIndexOf('/') + 1);
         }).catch(
         error => {
             console.log(error);
         }
-    )
+    );
 }
